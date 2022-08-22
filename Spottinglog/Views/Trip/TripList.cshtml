@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Spottinglog.Models.tblSpottingTrip>
+@{
+    ViewBag.Title = "TripList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spottinglog|TripList</title>
+
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Trip List</h3>
+
+                    <div class="card-tools">
+                        <input type="button" class="btn btn-primary" value="CreateTrip" onclick="location.href='@Url.Action("Index", "Trip")'" />
+                        <input type="button" class="btn btn-primary" value="Create Sightings" onclick="location.href='@Url.Action("Index", "Sightings")'" />
+                       
+                      
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap" id="TripList">
+                        <thead>
+                            <tr>
+                                <th>TripId</th>
+                                <th>Country</th>
+                                <th>Airport</th>
+                                <th>DateofTrip</th>
+                                <th>Comments</th>                              
+
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TripId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Country)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Airport)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateofTrip)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Comments)
+                                    </td>
+                                   
+
+
+
+                                    <td>
+
+                                       
+                                        <a target="_blank" onclick="location.href='@Url.Action("Edit", "Trip" ,new { id=item.TripId })';return false;" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                                        @Html.ActionLink("Remove", "Delete", "Trip", new { id = item.TripId }, new { @OnClick = "return confirm('Are you sure you to delete this Record?');", @class = "btn btn-info btn-xs" })
+
+
+
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael -->
+   
+
+
+    <script type="text/javascript">
+        function Confirm() {
+            var input = $("<input />");
+            input.attr("type", "hidden").attr("name", "confirm_value");
+            if (confirm("Do you want to save data?")) {
+                input.val("Yes");
+            } else {
+                input.val("No");
+            }
+            $("form")[0].appendChild(input[0]);
+        }
+    </script>
+
+
+
+
+
+</body>
+</html>
+

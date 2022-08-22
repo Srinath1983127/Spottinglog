@@ -1,0 +1,71 @@
+﻿@model Spottinglog.Models.tblSighting
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Sightings</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+
+
+ 
+
+
+
+            <form>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Registration (eg: G-EZOX, PH-KZA)</label>
+                        <input type="email" class="form-control"  id="Registration" value="@Model.Registration" name="CustomerID" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Airline</label>
+                        <input type="password" class="form-control" id="Airline" value="@Model.Airline" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Aircraft Make</label>
+                        <input type="password" class="form-control" id="AircraftType" value="@Model.AircraftType" maxlength="1" placeholder="Enter aircraft make">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Model</label>
+                        <input type="password" class="form-control" id="MSN" value="@Model.MSN" maxlength="1" placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputFile">Photo (Maximum file size 1MB)</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="PhotoCode" value="@Model.PhotoCode" name="PhotoCode">
+                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Spotting Trip</label>
+                       @Html.DropDownList("SpottingTrip", ViewBag.SpottingTripe as SelectList, "-Select trip-", new { @onchange = "Call()", @class = "form-control" })
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" formaction="CreateSighting">Submit</button>
+                </div>
+            </form>
+  
+        </div>
+    </div>
+
+</div>
+

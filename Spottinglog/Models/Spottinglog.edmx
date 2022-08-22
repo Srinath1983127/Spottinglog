@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SpottinglogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginID" Type="varchar" MaxLength="12" />
+          <Property Name="UserName" Type="varchar" MaxLength="28" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="65" />
+          <Property Name="eMail" Type="varchar" MaxLength="65" />
+          <Property Name="SysAdmin" Type="bit" />
+          <Property Name="ResetPassword" Type="bit" />
+          <Property Name="DealerID" Type="int" />
+          <Property Name="TextExtra1" Type="varchar" MaxLength="50" />
+          <Property Name="TextExtra2" Type="varchar" MaxLength="50" />
+          <Property Name="FloatExtra1" Type="float" />
+          <Property Name="FloatExtra2" Type="float" />
+          <Property Name="IntExtra" Type="int" />
+          <Property Name="RecDate" Type="datetime" />
+          <Property Name="RecUser" Type="int" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="CompanyCode" Type="varchar" MaxLength="50" />
+          <Property Name="UserRoleId" Type="int" />
+          <Property Name="IsSearch" Type="bit" />
+          <Property Name="IsPrint" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="IsSave" Type="bit" />
+          <Property Name="TrnFlag" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="PassWordExpiryDate" Type="date" />
+          <Property Name="ApprovalStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblAirport">
+          <Key>
+            <PropertyRef Name="Airportid" />
+          </Key>
+          <Property Name="Airportid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Countryid" Type="int" />
+          <Property Name="Airport" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblCountry">
+          <Key>
+            <PropertyRef Name="Countryid" />
+          </Key>
+          <Property Name="Countryid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblSighting">
+          <Key>
+            <PropertyRef Name="Sightingid" />
+          </Key>
+          <Property Name="Sightingid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Registration" Type="varchar" MaxLength="50" />
+          <Property Name="Airline" Type="varchar" MaxLength="50" />
+          <Property Name="AircraftType" Type="varchar" MaxLength="50" />
+          <Property Name="MSN" Type="varchar" MaxLength="50" />
+          <Property Name="PhotoCode" Type="varchar" MaxLength="50" />
+          <Property Name="SpottingTrip" Type="int" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblSpottingTrip">
+          <Key>
+            <PropertyRef Name="TripId" />
+          </Key>
+          <Property Name="TripId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="Airport" Type="varchar" MaxLength="50" />
+          <Property Name="DateofTrip" Type="date" />
+          <Property Name="Comments" Type="varchar(max)" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="TripDescription" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="Userid" />
+          </Key>
+          <Property Name="Userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="150" />
+          <Property Name="LoginID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Spottinglog.dbo.SightingList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SightingList">
+          <Key>
+            <PropertyRef Name="Sightingid" />
+          </Key>
+          <Property Name="Sightingid" Type="int" Nullable="false" />
+          <Property Name="Registration" Type="varchar" MaxLength="50" />
+          <Property Name="Airline" Type="varchar" MaxLength="50" />
+          <Property Name="AircraftType" Type="varchar" MaxLength="50" />
+          <Property Name="MSN" Type="varchar" MaxLength="50" />
+          <Property Name="PhotoCode" Type="varchar" MaxLength="50" />
+          <Property Name="SpottingTrip" Type="int" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" />
+          <Property Name="Airport" Type="varchar" MaxLength="50" />
+          <Property Name="TripDescription" Type="varchar(max)" />
+          <Property Name="DateofTrip" Type="date" />
+          <Property Name="Comments" Type="varchar(max)" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityContainer Name="SpottinglogModelStoreContainer">
+          <EntitySet Name="SystemUser" EntityType="Self.SystemUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAirport" EntityType="Self.tblAirport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCountry" EntityType="Self.tblCountry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSighting" EntityType="Self.tblSighting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSpottingTrip" EntityType="Self.tblSpottingTrip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SightingList" EntityType="Self.SightingList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SightingList].[Sightingid] AS [Sightingid], 
+    [SightingList].[Registration] AS [Registration], 
+    [SightingList].[Airline] AS [Airline], 
+    [SightingList].[AircraftType] AS [AircraftType], 
+    [SightingList].[MSN] AS [MSN], 
+    [SightingList].[PhotoCode] AS [PhotoCode], 
+    [SightingList].[SpottingTrip] AS [SpottingTrip], 
+    [SightingList].[Notes] AS [Notes], 
+    [SightingList].[FullName] AS [FullName], 
+    [SightingList].[Airport] AS [Airport], 
+    [SightingList].[TripDescription] AS [TripDescription], 
+    [SightingList].[DateofTrip] AS [DateofTrip], 
+    [SightingList].[Comments] AS [Comments], 
+    [SightingList].[Country] AS [Country], 
+    [SightingList].[UserID] AS [UserID]
+    FROM [dbo].[SightingList] AS [SightingList]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpottinglogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblCountry">
+          <Key>
+            <PropertyRef Name="Countryid" />
+          </Key>
+          <Property Name="Countryid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblSighting">
+          <Key>
+            <PropertyRef Name="Sightingid" />
+          </Key>
+          <Property Name="Sightingid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Registration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Airline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AircraftType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhotoCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SpottingTrip" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblSpottingTrip">
+          <Key>
+            <PropertyRef Name="TripId" />
+          </Key>
+          <Property Name="TripId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Airport" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateofTrip" Type="DateTime" Precision="0" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="TripDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblAirport">
+          <Key>
+            <PropertyRef Name="Airportid" />
+          </Key>
+          <Property Name="Airportid" Type="Int32" Nullable="false" />
+          <Property Name="Countryid" Type="Int32" />
+          <Property Name="Airport" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="SpottinglogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblCountries" EntityType="Self.tblCountry" />
+          <EntitySet Name="tblSightings" EntityType="Self.tblSighting" />
+          <EntitySet Name="tblSpottingTrips" EntityType="Self.tblSpottingTrip" />
+          <EntitySet Name="tblAirports" EntityType="Self.tblAirport" />
+          <EntitySet Name="SystemUsers" EntityType="SpottinglogModel.SystemUser" />
+          <EntitySet Name="tblUsers" EntityType="SpottinglogModel.tblUser" />
+          <EntitySet Name="SightingLists" EntityType="SpottinglogModel.SightingList" />
+        </EntityContainer>
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+          <Property Name="eMail" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+          <Property Name="SysAdmin" Type="Boolean" />
+          <Property Name="ResetPassword" Type="Boolean" />
+          <Property Name="DealerID" Type="Int32" />
+          <Property Name="TextExtra1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TextExtra2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FloatExtra1" Type="Double" />
+          <Property Name="FloatExtra2" Type="Double" />
+          <Property Name="IntExtra" Type="Int32" />
+          <Property Name="RecDate" Type="DateTime" Precision="3" />
+          <Property Name="RecUser" Type="Int32" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="CompanyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserRoleId" Type="Int32" />
+          <Property Name="IsSearch" Type="Boolean" />
+          <Property Name="IsPrint" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="IsSave" Type="Boolean" />
+          <Property Name="TrnFlag" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="PassWordExpiryDate" Type="DateTime" Precision="0" />
+          <Property Name="ApprovalStatus" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="Userid" />
+          </Key>
+          <Property Name="Userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="LoginID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SightingList">
+          <Key>
+            <PropertyRef Name="Sightingid" />
+          </Key>
+          <Property Name="Sightingid" Type="Int32" Nullable="false" />
+          <Property Name="Registration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Airline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AircraftType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhotoCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SpottingTrip" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Airport" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TripDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateofTrip" Type="DateTime" Precision="0" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SpottinglogModelStoreContainer" CdmEntityContainer="SpottinglogEntities">
+          <EntitySetMapping Name="tblCountries">
+            <EntityTypeMapping TypeName="SpottinglogModel.tblCountry">
+              <MappingFragment StoreEntitySet="tblCountry">
+                <ScalarProperty Name="Countryid" ColumnName="Countryid" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSightings">
+            <EntityTypeMapping TypeName="SpottinglogModel.tblSighting">
+              <MappingFragment StoreEntitySet="tblSighting">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Sightingid" ColumnName="Sightingid" />
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="Airline" ColumnName="Airline" />
+                <ScalarProperty Name="AircraftType" ColumnName="AircraftType" />
+                <ScalarProperty Name="MSN" ColumnName="MSN" />
+                <ScalarProperty Name="PhotoCode" ColumnName="PhotoCode" />
+                <ScalarProperty Name="SpottingTrip" ColumnName="SpottingTrip" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSpottingTrips">
+            <EntityTypeMapping TypeName="SpottinglogModel.tblSpottingTrip">
+              <MappingFragment StoreEntitySet="tblSpottingTrip">
+                <ScalarProperty Name="TripDescription" ColumnName="TripDescription" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Airport" ColumnName="Airport" />
+                <ScalarProperty Name="DateofTrip" ColumnName="DateofTrip" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAirports">
+            <EntityTypeMapping TypeName="SpottinglogModel.tblAirport">
+              <MappingFragment StoreEntitySet="tblAirport">
+                <ScalarProperty Name="Airportid" ColumnName="Airportid" />
+                <ScalarProperty Name="Countryid" ColumnName="Countryid" />
+                <ScalarProperty Name="Airport" ColumnName="Airport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemUsers">
+            <EntityTypeMapping TypeName="SpottinglogModel.SystemUser">
+              <MappingFragment StoreEntitySet="SystemUser">
+                <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+                <ScalarProperty Name="PassWordExpiryDate" ColumnName="PassWordExpiryDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TrnFlag" ColumnName="TrnFlag" />
+                <ScalarProperty Name="IsSave" ColumnName="IsSave" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsPrint" ColumnName="IsPrint" />
+                <ScalarProperty Name="IsSearch" ColumnName="IsSearch" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="RecUser" ColumnName="RecUser" />
+                <ScalarProperty Name="RecDate" ColumnName="RecDate" />
+                <ScalarProperty Name="IntExtra" ColumnName="IntExtra" />
+                <ScalarProperty Name="FloatExtra2" ColumnName="FloatExtra2" />
+                <ScalarProperty Name="FloatExtra1" ColumnName="FloatExtra1" />
+                <ScalarProperty Name="TextExtra2" ColumnName="TextExtra2" />
+                <ScalarProperty Name="TextExtra1" ColumnName="TextExtra1" />
+                <ScalarProperty Name="DealerID" ColumnName="DealerID" />
+                <ScalarProperty Name="ResetPassword" ColumnName="ResetPassword" />
+                <ScalarProperty Name="SysAdmin" ColumnName="SysAdmin" />
+                <ScalarProperty Name="eMail" ColumnName="eMail" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="SpottinglogModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SightingLists">
+            <EntityTypeMapping TypeName="SpottinglogModel.SightingList">
+              <MappingFragment StoreEntitySet="SightingList">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="DateofTrip" ColumnName="DateofTrip" />
+                <ScalarProperty Name="TripDescription" ColumnName="TripDescription" />
+                <ScalarProperty Name="Airport" ColumnName="Airport" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="SpottingTrip" ColumnName="SpottingTrip" />
+                <ScalarProperty Name="PhotoCode" ColumnName="PhotoCode" />
+                <ScalarProperty Name="MSN" ColumnName="MSN" />
+                <ScalarProperty Name="AircraftType" ColumnName="AircraftType" />
+                <ScalarProperty Name="Airline" ColumnName="Airline" />
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="Sightingid" ColumnName="Sightingid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,162 @@
+﻿@model IEnumerable<Spottinglog.Models.SightingList>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Dashboard 2</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    @*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">*@
+    
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+    @*<!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.js"></script>*@
+   
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Recent Sightings</h3>
+
+                    <div class="card-tools">
+
+                        <input type="button" class="btn btn-primary" value="Create Sightings" onclick="location.href='@Url.Action("Index", "Sightings")'" />
+                        <input type="button" class="btn btn-primary" value="CreateTrip" onclick="location.href='@Url.Action("Index", "Trip")'" />
+                        @*<div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap" id="SpottingList">
+                        <thead>
+                            <tr>
+                                <th hidden>Sightingid</th>
+                                <th>Registration</th>
+                                <th>Airline</th>
+                                <th>Aircraft Make</th>
+                                <th>Model</th>
+                                <th>Airport</th>
+                                <th>Date Seen</th>
+
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td hidden>
+                                        @Html.DisplayFor(modelItem => item.Sightingid)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Registration)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Airline)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AircraftType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MSN)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Airport)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateofTrip)
+                                    </td>
+
+
+
+                                    <td>
+
+                                      
+                                        <a target="_blank" onclick="location.href='@Url.Action("Edit", "Sightings" ,new { id=item.Sightingid }) ';return false;" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+
+                                        @Html.ActionLink("Remove", "Delete", "Sightings", new { id = item.Sightingid }, new { @OnClick = "return confirm('Are you sure you to delete this Record?');", @class = "btn btn-info btn-xs" })
+                                       
+                                  
+
+
+</td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael -->
+    @*<script src="../../plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="../../plugins/raphael/raphael.min.js"></script>
+    <script src="../../plugins/jquery-mapael/jquery.mapael.min.js"></script>
+    <script src="../../plugins/jquery-mapael/maps/usa_states.min.js"></script>
+    <!-- ChartJS -->
+    <script src="../../plugins/chart.js/Chart.min.js"></script>
+
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="../../dist/js/pages/dashboard2.js"></script>
+    <script src="../../dist/js/pages/dashboard2.js"></script>*@
+
+    <script type="text/javascript">
+        function Confirm() {
+            var input = $("<input />");
+            input.attr("type", "hidden").attr("name", "confirm_value");
+            if (confirm("Do you want to save data?")) {
+                input.val("Yes");
+            } else {
+                input.val("No");
+            }
+            $("form")[0].appendChild(input[0]);
+        }
+    </script>
+
+
+  
+
+
+</body>
+</html>

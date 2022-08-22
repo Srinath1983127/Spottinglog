@@ -1,0 +1,105 @@
+﻿@model Spottinglog.Models.tblSighting
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Sightings</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+
+
+            @using (Html.BeginForm("Create", "Sightings", FormMethod.Post, new { @class = "form-horizontal form-label-left", role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.AntiForgeryToken()
+
+
+
+                <form>
+                    <div class="card-body">
+                        <div class="form-group">
+                            
+                            <input type="text" class="form-control" id="Sightingid" name="Sightingid" value="@Model.Sightingid" hidden>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Registration (eg: G-EZOX, PH-KZA)</label>
+                            <input type="text" class="form-control" id="Registration" name="Registration" value="@Model.Registration" pattern="\[A-Z]{1,2]\-\[A-Z]{1,5}" title="Two parts separated by a hyphen. Prefix should be either one or two characters. Suffix should be between one and five characters" placeholder="Enter Registration" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Airline</label>
+                            <input type="text" class="form-control" id="Airline" placeholder="Enter Airline" name="Airline" value="@Model.Airline" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Aircraft Make</label>
+                            <input type="text" class="form-control" id="AircraftType" maxlength="128" placeholder="Enter Make" name="AircraftType" value="@Model.AircraftType" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Model</label>
+                            <input type="text" class="form-control" id="MSN" maxlength="128" placeholder="Enter Model" name="MSN" value="@Model.MSN" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Photo (Maximum file size 1MB)</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="PhotoCode" name="PhotoCode" required>
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
+                                @*<div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>*@
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Spotting Trip</label>
+                            @Html.DropDownList("SpottingTrip", ViewBag.SpottingTripe as SelectList, "-Select trip-", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" formaction="Create">Submit</button>
+                    </div>
+                    
+                </form>
+            }
+
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Sightings Picture</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            
+                <div class="card-body">
+                   
+                    <img src="~/Spottinglmg/@Html.DisplayFor(model =>model.PhotoCode)" style="height:590px;width:500px;" />
+
+                  
+                </div>
+                <!-- /.card-body -->
+
+               
+           
+        </div>
+    </div>
+   
+</div>
+

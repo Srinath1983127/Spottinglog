@@ -1,0 +1,106 @@
+﻿@model Spottinglog.Models.tblSpottingTrip
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Trips</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+
+
+            @using (Html.BeginForm("Edit", "Trip", FormMethod.Post, new { @class = "form-horizontal form-label-left", role = "form" }))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.AntiForgeryToken()
+
+
+
+                <form>
+                    <div class="card-body">
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" id="TripId"  name="TripId" value="@Model.TripId" hidden>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Country</label>
+                            @Html.DropDownList("Country", ViewBag.Country as SelectList, "-Select country-", new { @onchange = "FillAirport()", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Airport</label>
+
+                            <select id="drAirport" class="form-control" name="Airport" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Date of Trip</label>
+                            <input type="date" class="form-control" id="DateofTrip" placeholder="Enter date of trip" name="DateofTrip" value="@Model.DateofTrip">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Comments</label>
+                            <input type="text" class="form-control" id="Comments" placeholder="Enter comments" name="Comments" value="@Model.Comments">
+                        </div>
+
+
+
+
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" formaction="Edit">Submit</button>
+                    </div>
+                </form>
+            }
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+  function FillAirport() {
+      var stateId = $('#Country').val();
+
+      $.ajax({
+          url:"@Url.Action("GetAirport", "Trip")",
+          type: "GET",
+        dataType: "JSON",
+        data: { State: stateId},
+        success: function (data) {
+
+            $("#drAirport").html("");
+
+            $("#drAirport").append(
+                         $('<option></option>').val(-1).text("Select airport"));
+            $.each(data, function (i) {
+
+
+
+                $("#drAirport").append(
+                    $('<option></option>').val(data[i].Airport).text(data[i].Airport));
+            });
+
+
+        }
+
+
+
+
+
+
+
+      });
+
+      GetWarehouseItem();
+  }
+</script>
+
